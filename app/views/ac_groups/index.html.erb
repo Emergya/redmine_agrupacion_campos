@@ -9,7 +9,7 @@
 <% @trackers.each do |tracker| %>
 
 	<div class="contextual">
-	  <%= link_to '<span class="icon icon-add">'.html_safe+"Añadir agrupación", new_project_ac_group_path(:project_id => @project, :tracker => @tracker) %>
+	  <%= link_to '<span class="icon icon-add">'.html_safe+"Añadir agrupación", new_project_ac_group_path(:project_id => @project, :tracker_id => tracker.id) %>
 	</div>
 
 	<h3><%= tracker.name %></h3>
@@ -30,7 +30,7 @@
 		    	<td><%= group.name %></td>
 		    	<td><%= group.ac_fields.count %></td>
 		    	<td> 
-		     	<%= link_to '<span class="icon icon-edit">'.html_safe+"Editar", edit_project_ac_group_path(group, :project_id => @project) %>
+		     	<%= link_to '<span class="icon icon-edit">'.html_safe+"Editar", edit_project_ac_group_path(group, :project_id => @project, :tracker_id => tracker.id) %>
 				<%= link_to '<span class="icon icon-del">'.html_safe+"Eliminar", project_ac_group_path(group, :project_id => @project), :confirm => "¿Desea eliminar este tipo de agrupación?", :method => :delete %>
 				</td>
 		    </tr>
@@ -43,6 +43,6 @@
 	    
 	</tbody>
 	</table>
-	
+
 	<br>
 <% end %>

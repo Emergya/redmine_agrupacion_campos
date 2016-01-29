@@ -1,0 +1,21 @@
+<%= csrf_meta_tag %>
+<% content_for :header_tags do %>
+   <%= stylesheet_link_tag "/ac_groups.css", :plugin => 'redmine_agrupacion_campos', :media => "screen" %>
+<% end %>
+
+<h2>Nueva agrupación para <%= @tracker.name %></h2>
+
+<%= form_for [@project, @group] do |f| %>
+	<div><%= f.label "Nombre: " %></div>
+	<%= f.text_field(:name, :size => 30) %>
+	
+	<div><%= f.label "Prioridad: " %></div>
+	<%= f.number_field(:priority, :step => 1) %>
+
+	<%= f.hidden_field :tracker_id, :value => @tracker.id %>
+
+	<div>
+	<%= f.submit "Guardar", style: "float: left" %>
+	</div>
+<% end %>
+<%= button_to "Volver", project_ac_groups_path(:project_id => @project) %>
