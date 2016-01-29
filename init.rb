@@ -1,3 +1,5 @@
+require 'ac/tracker_patch'
+
 Redmine::Plugin.register :redmine_agrupacion_campos do
   name 'Redmine Agrupacion Campos plugin'
   author 'jresinas, mabalos'

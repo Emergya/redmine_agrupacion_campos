@@ -1,0 +1,48 @@
+<%= csrf_meta_tag %>
+<% content_for :header_tags do %>
+   <%= stylesheet_link_tag "/ac_groups.css", :plugin => 'redmine_agrupacion_campos', :media => "screen" %>
+<% end %>
+
+
+<h2> Agrupaciones </h2>
+
+<% @trackers.each do |tracker| %>
+
+	<div class="contextual">
+	  <%= link_to '<span class="icon icon-add">'.html_safe+"Añadir agrupación", new_project_ac_group_path(:project_id => @project, :tracker => @tracker) %>
+	</div>
+
+	<h3><%= tracker.name %></h3>
+	<table class="list">
+	<thead>
+	<tr>
+	   <th>Prioridad</th>
+	   <th>Agrupación</th>
+	   <th>Nº de campos</th>
+	   <th class="table_groups_permissions">Permisos</th>
+	</tr>
+	</thead>
+	<tbody>
+		<%if tracker.ac_groups.present? %>
+			<% tracker.ac_groups.order('priority ASC').each do |group| %>
+		    <tr class="<%= cycle("odd", "even") %>">
+		    	<td><%= group.priority %></td>
+		    	<td><%= group.name %></td>
+		    	<td><%= group.ac_fields.count %></td>
+		    	<td> 
+		     	<%= link_to '<span class="icon icon-edit">'.html_safe+"Editar", edit_project_ac_group_path(group, :project_id => @project) %>
+				<%= link_to '<span class="icon icon-del">'.html_safe+"Eliminar", project_ac_group_path(group, :project_id => @project), :confirm => "¿Desea eliminar este tipo de agrupación?", :method => :delete %>
+				</td>
+		    </tr>
+			<% end %>
+		<% else %>
+			<tr class="<%= cycle("odd", "even") %>">
+			    <td colspan="4"><i>No existe ningúna agrupación para este tipo de petición.</i></td>
+			</tr>
+		<% end %>
+	    
+	</tbody>
+	</table>
+	
+	<br>
+<% end %>
