@@ -1,4 +1,4 @@
-class CreateFiles < ActiveRecord::Migration
+class CreateGroups < ActiveRecord::Migration
   def change
     create_table :ac_groups do |t|
         t.column :name, :string

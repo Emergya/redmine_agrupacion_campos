@@ -1,4 +1,4 @@
-class CreateFiles < ActiveRecord::Migration
+class CreateFields < ActiveRecord::Migration
   def change
     create_table :ac_fields do |t|
         t.column :custom_field_id, :integer
