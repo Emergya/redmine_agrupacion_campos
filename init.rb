@@ -9,6 +9,7 @@ Redmine::Plugin.register :redmine_agrupacion_campos do
 
   project_module :agrupacion_de_campos do
     permission :ac_edit_groups, :ac_groups => [:index, :new, :create, :edit, :update, :destroy]
+    permission :ac_edit_fields, :ac_fields => [:destroy]
   end
 
   menu :project_menu, :config_agrupacion_campos, { :controller => 'ac_groups', :action => 'index' }, :caption => 'Agrupacion de campos', :last => true, :param => :project_id

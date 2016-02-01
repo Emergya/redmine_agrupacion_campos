@@ -3,6 +3,7 @@ class AcGroup < ActiveRecord::Base
 
   has_many :ac_fields, :dependent => :destroy
   belongs_to :tracker
+  accepts_nested_attributes_for :ac_fields
 
   # Genera mensaje de error
   def get_error_message

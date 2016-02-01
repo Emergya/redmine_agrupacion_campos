@@ -23,7 +23,7 @@
 	</tr>
 	</thead>
 	<tbody>
-		<%if tracker.ac_groups.present? %>
+		<% if tracker.ac_groups.present? %>
 			<% tracker.ac_groups.order('priority ASC').each do |group| %>
 		    <tr class="<%= cycle("odd", "even") %>">
 		    	<td><%= group.priority %></td>
