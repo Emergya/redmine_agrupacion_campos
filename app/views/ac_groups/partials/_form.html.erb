@@ -7,26 +7,39 @@
 <h2>Nueva agrupación para <%= @tracker.name %></h2>
 
 <%= form_for [@project, @group] do |f| %>
-	<div><%= f.label "Nombre: " %></div>
-	<%= f.text_field(:name, :size => 30) %>
-	
-	<div><%= f.label "Prioridad: " %></div>
-	<%= f.number_field(:priority, :step => 1) %>
+	<div class="d_group">
+		<div class="d_field">
+			<div><%= f.label "Nombre: " %></div>
+			<%= f.text_field(:name, :size => 30) %>
+		</div>
 
+		<div class="d_field d_field_priority">
+			<div><%= f.label "Prioridad: " %></div>
+			<%= f.number_field(:priority, :step => 1, class: "group_number_field") %>
+		</div>
+	</div>
 	<%= f.hidden_field :tracker_id, :value => @tracker.id %>
 
-	<fieldset>
-		<%= select_tag "select_fields_hidden", options_for_select(@custom_fields_by_tracker),:class => "select_fields_hidden", :style => "visibility: hidden" %>
+	<%= select_tag "select_fields_hidden", options_for_select(@custom_fields_by_tracker),:class => "select_fields_hidden", :style => "visibility: hidden" %>
+	<fieldset class="fieldset_fields">
 		<% if @count_fields != 0 %>
 			<% (0...@count_fields).each do |i| %>
 				<%= f.fields_for :ac_fields, @field[i] do |j| %>
-					<fieldset class= "fieldset_for_field_<%= i %>">
-						<p><%= j.label "Campo personalizado: " %></p>
+					<fieldset class= "f_field fieldset_for_field_<%= i %>">
+						<div class="d_field">
+						<p class="p_field"><%= j.label "Campo personalizado: " %></p>
 						<%= j.select :custom_field_id, options_for_select(@custom_fields_by_tracker, :selected => @field[i][:custom_field_id]) %>
-						<p><%= j.label "Prioridad: " %></p>
-						<%= j.number_field(:priority, :step => 1) %>
+						</div>
 
+						<div class="d_field d_field_priority">
+						<p class="p_field"><%= j.label "Prioridad: " %></p>
+						<%= j.number_field(:priority, :step => 1, class: "field_number_field") %>
+						</div>
+
+						<div class="d_field d_field_delete">
 						<%= link_to '<span class="icon icon-del">'.html_safe+"Eliminar", project_ac_group_ac_field_path(@group, @field[i], :tracker_id => @tracker.id,:project_id => @project), :confirm => "¿Desea eliminar este campo personalizado?", :method => :delete if !@field[i].new_record? %>
+						</div>
+
 					</fieldset>
 				<% end %>
 			<% end %>
@@ -38,7 +51,7 @@
 	</fieldset>
 
 	<div>
-	<%= f.submit "Guardar", style: "float: left" %>
+	<%= f.submit "Guardar", class: "btn_save_group",style: "float: left" %>
 	</div>
 <% end %>
 <%= button_to "Volver", project_ac_groups_path(:project_id => @project) %>
