@@ -38,10 +38,11 @@ class AcGroup < ActiveRecord::Base
   def check_priority_field_empty
     is_blank = false
     self.ac_fields.each do |field|
+      binding.pry
       is_blank = true if field.priority.blank?
     end
 
-    errors.add :base, l(:"field.error.priority_is_empty") if is_blank = true
+    errors.add :base, l(:"field.error.priority_is_empty") if is_blank == true
   end
   
 end
