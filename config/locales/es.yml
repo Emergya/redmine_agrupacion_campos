@@ -3,7 +3,7 @@ es:
     delete: Eliminar
     save: Guardar
     back: Volver
-    
+
     group: 
         groups_title: Agrupaciones
         group_title: Agrupación
@@ -15,8 +15,15 @@ es:
         new_group_message: 'Nueva agrupación para '
         name: Nombre
 
+        error:
+            name_is_empty: "Debe introducir un nombre para la agrupación."
+            priority_is_empty: "Debe introducir una prioridad para la agrupación."
+
     field:
         custom_fields: Campos personalizados
         custom_field: Campo personalizado
         priority: Prioridad
         add: Añadir campo personalizado
+
+        error:
+            priority_is_empty: "Debe introducir una prioridad para los campos personalizados."
