@@ -4,22 +4,22 @@
 <% end %>
 
 
-<h2> Agrupaciones </h2>
+<h2> <%= l(:'group.groups_title') %></h2>
 
 <% @trackers.each do |tracker| %>
 
 	<div class="contextual">
-	  <%= link_to '<span class="icon icon-add">'.html_safe+"Añadir agrupación", new_project_ac_group_path(:project_id => @project, :tracker_id => tracker.id) %>
+	  <%= link_to '<span class="icon icon-add">'.html_safe+l(:'group.add'), new_project_ac_group_path(:project_id => @project, :tracker_id => tracker.id) %>
 	</div>
 
 	<h3><%= tracker.name %></h3>
 	<table class="list">
 	<thead>
 	<tr>
-	   <th>Prioridad</th>
-	   <th>Agrupación</th>
-	   <th>Nº de campos</th>
-	   <th class="table_groups_permissions">Permisos</th>
+	   <th><%= l(:'group.priority') %></th>
+	   <th><%= l(:'group.group_title') %></th>
+	   <th><%= l(:'group.count_fields') %></th>
+	   <th class="table_groups_permissions"><%= l(:'group.permissions') %></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -30,14 +30,14 @@
 		    	<td><%= group.name %></td>
 		    	<td><%= group.ac_fields.count %></td>
 		    	<td> 
-		     	<%= link_to '<span class="icon icon-edit">'.html_safe+"Editar", edit_project_ac_group_path(group, :project_id => @project, :tracker_id => tracker.id) %>
-				<%= link_to '<span class="icon icon-del">'.html_safe+"Eliminar", project_ac_group_path(group, :project_id => @project), :confirm => "¿Desea eliminar este tipo de agrupación?", :method => :delete %>
+		     	<%= link_to '<span class="icon icon-edit">'.html_safe+l(:edit), edit_project_ac_group_path(group, :project_id => @project, :tracker_id => tracker.id) %>
+				<%= link_to '<span class="icon icon-del">'.html_safe+l(:delete), project_ac_group_path(group, :project_id => @project), :confirm => "¿Desea eliminar este tipo de agrupación?", :method => :delete %>
 				</td>
 		    </tr>
 			<% end %>
 		<% else %>
 			<tr class="<%= cycle("odd", "even") %>">
-			    <td colspan="4"><i>No existe ningúna agrupación para este tipo de petición.</i></td>
+			    <td colspan="4"><i><%= l(:'group.not_groups_found') %></i></td>
 			</tr>
 		<% end %>
 	    

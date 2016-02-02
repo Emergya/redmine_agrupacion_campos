@@ -4,17 +4,17 @@
    <%= stylesheet_link_tag "/ac_groups.css", :plugin => 'redmine_agrupacion_campos', :media => "screen" %>
 <% end %>
 
-<h2>Nueva agrupación para <%= @tracker.name %></h2>
+<h2><%= l(:'group.new_group_message') + @tracker.name %></h2>
 
 <%= form_for [@project, @group] do |f| %>
 	<div class="d_group">
 		<div class="d_field">
-			<div><%= f.label "Nombre: " %></div>
+			<div><%= f.label l(:'group.name')+": " %></div>
 			<%= f.text_field(:name, :size => 30) %>
 		</div>
 
 		<div class="d_field d_field_priority">
-			<div><%= f.label "Prioridad: " %></div>
+			<div><%= f.label l(:'group.priority')+": " %></div>
 			<%= f.number_field(:priority, :step => 1, class: "group_number_field") %>
 		</div>
 	</div>
@@ -22,22 +22,23 @@
 
 	<%= select_tag "select_fields_hidden", options_for_select(@custom_fields_by_tracker),:class => "select_fields_hidden", :style => "visibility: hidden" %>
 	<fieldset class="fieldset_fields">
+		<legend><b><%= l(:'field.custom_fields') %></b></legend>
 		<% if @count_fields != 0 %>
 			<% (0...@count_fields).each do |i| %>
 				<%= f.fields_for :ac_fields, @field[i] do |j| %>
 					<fieldset class= "f_field fieldset_for_field_<%= i %>">
 						<div class="d_field">
-						<p class="p_field"><%= j.label "Campo personalizado: " %></p>
+						<p class="p_field"><%= j.label l(:'field.custom_field')+": " %></p>
 						<%= j.select :custom_field_id, options_for_select(@custom_fields_by_tracker, :selected => @field[i][:custom_field_id]) %>
 						</div>
 
 						<div class="d_field d_field_priority">
-						<p class="p_field"><%= j.label "Prioridad: " %></p>
+						<p class="p_field"><%= j.label l(:'field.priority')+": " %></p>
 						<%= j.number_field(:priority, :step => 1, class: "field_number_field") %>
 						</div>
 
 						<div class="d_field d_field_delete">
-						<%= link_to '<span class="icon icon-del">'.html_safe+"Eliminar", project_ac_group_ac_field_path(@group, @field[i], :tracker_id => @tracker.id,:project_id => @project), :confirm => "¿Desea eliminar este campo personalizado?", :method => :delete if !@field[i].new_record? %>
+						<%= link_to '<span class="icon icon-del">'.html_safe+l(:delete), project_ac_group_ac_field_path(@group, @field[i], :tracker_id => @tracker.id,:project_id => @project), :confirm => "¿Desea eliminar este campo personalizado?", :method => :delete if !@field[i].new_record? %>
 						</div>
 
 					</fieldset>
@@ -46,12 +47,12 @@
 		<% end %>
 
 		<div class="btn_add_field">
-		    <a><span class="icon icon-add add_field" data-count="<%= @count_fields %>">Añadir campo personalizado</span></a>
+		    <a><span class="icon icon-add add_field" data-count="<%= @count_fields %>"><%= l(:'field.add') %></span></a>
 		</div>
 	</fieldset>
 
 	<div>
-	<%= f.submit "Guardar", class: "btn_save_group",style: "float: left" %>
+	<%= f.submit l(:save), class: "btn_save_group",style: "float: left" %>
 	</div>
 <% end %>
-<%= button_to "Volver", project_ac_groups_path(:project_id => @project) %>
+<%= button_to l(:back), project_ac_groups_path(:project_id => @project) %>
