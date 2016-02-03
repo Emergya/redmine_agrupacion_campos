@@ -8,6 +8,8 @@ Redmine::Plugin.register :redmine_agrupacion_campos do
   version '0.0.1'
   author_url 'http://www.emergya.es'
 
+  requires_redmine_plugin :adapter_deface, :version_or_higher => '0.0.1'
+
   project_module :agrupacion_de_campos do
     permission :ac_edit_groups, :ac_groups => [:index, :new, :create, :edit, :update, :destroy]
     permission :ac_edit_fields, :ac_fields => [:destroy]

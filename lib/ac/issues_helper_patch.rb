@@ -23,9 +23,9 @@ module AC
       def render_custom_fields_rows_with_groups_fields(issue)
       	# Metodo que permite mostrar en las peticiones los campos personalizados mediente agrupaciones dentro de fieldsets.
 
-      	# 1º Buscamos si tiene grupos personalizados ese tracker al que pertenece la petición
+      	# Buscamos si tiene grupos personalizados ese tracker al que pertenece la petición
       	@groups = AcGroup.where('tracker_id = ?', issue.tracker_id)
-      	if @groups.count > 0
+      	if @groups.count > 0 && @project.module_enabled?(:agrupacion_de_campos)
 
   			values = issue.visible_custom_field_values
 			return if values.empty?
@@ -41,6 +41,8 @@ module AC
 		   	s << "<td colspan='4'>"
 		   	
 		   	@groups.each do |group|
+		   		
+		   		# Recorremos los grupos y comprobamos que existen campos personalizados asignados.
 		   		if group.ac_fields.present?
 			   		s << "<fieldset>"
 			   		s << "<legend>"+group.name+"</legend>"
@@ -59,7 +61,7 @@ module AC
 			s << "</tr>\n"
 			s.html_safe
       	else
-        	render_custom_fields_rows_without_groups_fields
+        	render_custom_fields_rows_without_groups_fields(issue)
     	end
       end
     end
