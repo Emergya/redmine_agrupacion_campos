@@ -1,3 +1,8 @@
+<%= csrf_meta_tag %>
+<% content_for :header_tags do %>
+   <%= stylesheet_link_tag "/edit_fieldsets.css", :plugin => 'redmine_agrupacion_campos', :media => "screen" %>
+<% end %>
+
 <% @groups = AcGroup.where('tracker_id = ?', @issue.tracker_id) %>
 <% custom_field_values = @issue.editable_custom_field_values %>
 
@@ -7,11 +12,10 @@
 				<% if group.ac_fields.present? %>
 					<fieldset>
 						<legend><%= group.name %></legend>
-
 						<% custom_field_values.each do |value| %>
 							<% id_custom_field = value.custom_field.id %>
 							<% if group.ac_fields.where("custom_field_id = ?",id_custom_field).present? %>
-								<p><%= custom_field_tag_with_label :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %></p>
+								<p class="edit_field"><%= custom_field_tag_with_label :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %></p>
 							<% end %>
 						<% end %>
 					</fieldset><br>

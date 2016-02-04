@@ -21,7 +21,7 @@ module AC
 
     module InstanceMethods
       def render_custom_fields_rows_with_groups_fields(issue)
-      	# Metodo que permite mostrar en las peticiones los campos personalizados mediente agrupaciones dentro de fieldsets.
+      	# Metodo que permite mostrar los campos personalizados mediente agrupaciones dentro de fieldsets.
 
       	# Buscamos si tiene grupos personalizados ese tracker al que pertenece la petición
       	@groups = AcGroup.where('tracker_id = ?', issue.tracker_id)
@@ -50,11 +50,11 @@ module AC
 				   	ordered_values.compact.each do |value|
 				   		id_custom_field = value.custom_field.id 
 				   		if group.ac_fields.where('custom_field_id = ?',id_custom_field).present?
-				   			s << "<b>#{ h(value.custom_field.name) }:</b> #{ simple_format_without_paragraph(h(show_value(value)))}<br>\n"
+				   			s << "<br><b>#{ h(value.custom_field.name) }:&nbsp;</b> #{ simple_format_without_paragraph(h(show_value(value)))}<br>\n"
 				   		end
 				   	end
 
-		   			s << "</fieldset><br>"
+		   			s << "<br></fieldset><br>"
 			    end
 		   	end
 
@@ -68,12 +68,12 @@ module AC
   end
 end
 
-	if Rails::VERSION::MAJOR >= 3
-	  ActionDispatch::Callbacks.to_prepare do
-	    IssuesHelper.send(:include, AC::IssuesHelperPatch)
-	  end
-	else
-	  Dispatcher.to_prepare do
-	    IssuesHelper.send(:include, AC::IssuesHelperPatch)
-	   end
-    end
+if Rails::VERSION::MAJOR >= 3
+  ActionDispatch::Callbacks.to_prepare do
+    IssuesHelper.send(:include, AC::IssuesHelperPatch)
+  end
+else
+  Dispatcher.to_prepare do
+    IssuesHelper.send(:include, AC::IssuesHelperPatch)
+   end
+end
