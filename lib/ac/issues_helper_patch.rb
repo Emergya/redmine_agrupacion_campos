@@ -24,45 +24,62 @@ module AC
       	# Metodo que permite mostrar los campos personalizados mediente agrupaciones dentro de fieldsets.
 
       	# Buscamos si tiene grupos personalizados ese tracker al que pertenece la petición
-      	@groups = AcGroup.where('tracker_id = ?', issue.tracker_id)
+      	@groups = issue.tracker.ac_groups
       	if @groups.count > 0 && @project.module_enabled?(:agrupacion_de_campos)
 
-  			values = issue.visible_custom_field_values
-			return if values.empty?
-		   	ordered_values = []
-		   	half = (values.size / 2.0).ceil
-		   	
-		   	half.times do |i|
-		   		ordered_values << values[i]
-		   		ordered_values << values[i + half]
-		   	end
-		   	
-		   	s = "<tr>\n"
-		   	s << "<td colspan='4'>"
-		   	
-		   	@groups.each do |group|
-		   		
-		   		# Recorremos los grupos y comprobamos que existen campos personalizados asignados.
-		   		if group.ac_fields.present?
-			   		s << "<fieldset>"
-			   		s << "<legend>"+group.name+"</legend>"
+      		values = issue.visible_custom_field_values
+    			return if values.empty?
 
-				   	ordered_values.compact.each do |value|
-				   		id_custom_field = value.custom_field.id 
-				   		if group.ac_fields.where('custom_field_id = ?',id_custom_field).present?
-				   			s << "<br><b>#{ h(value.custom_field.name) }:&nbsp;</b> #{ simple_format_without_paragraph(h(show_value(value)))}<br>\n"
-				   		end
-				   	end
+          map_values = values.index_by(&:custom_field_id)
+          cf_used = []
+	   	
+    		  s = "<tr>\n"
+    		  s << "<td colspan='4'><br>"
+    		  
+    		  @groups.order("priority ASC").each do |group|
+    		  	
+    		  	# Muestra los campos personalizados que estan asignados a ningún grupo.
+    		  	if group.ac_fields.present?
+    			 		s << "<fieldset>"
+    			 		s << "<legend>"+group.name+"</legend>"
 
-		   			s << "<br></fieldset><br>"
-			    end
-		   	end
+              group.ac_fields.order("priority ASC").each do |cf|
+                if map_values.keys.include?(cf.custom_field_id)
+                  cf_used << cf.custom_field_id
+                  value = map_values[cf.custom_field_id]
+                    s << "<br><b><div style='width: 200px; float: left'>#{ h(value.custom_field.name) }:</div></b>"
+                    if show_value(value).empty?
+                      s << "<div>-</div>\n"
+                    else
+                      s << "<div>#{ simple_format_without_paragraph(h(show_value(value)))}</div>\n"
+                    end
+                end
+              end
 
-			s << "</tr>\n"
-			s.html_safe
+    		  		s << "<br></fieldset><br>"
+    			  end
+          end
+
+          # Muestra los campos personalizados que no estan asignados a un grupo
+          cf_used.uniq!
+
+          values.compact.each do |value|
+            if !cf_used.include?(value.custom_field_id)
+              s << "<br><b><div style='width: 200px; float: left'>#{ h(value.custom_field.name) }:</div></b>"
+              if show_value(value).empty?
+                s << "<div>-</div>\n"
+              else
+                s << "<div>#{ simple_format_without_paragraph(h(show_value(value)))}</div>\n"
+              end
+            end
+          end
+
+
+    			s << "</tr>\n"
+    			s.html_safe
       	else
         	render_custom_fields_rows_without_groups_fields(issue)
-    	end
+    	  end
       end
     end
   end

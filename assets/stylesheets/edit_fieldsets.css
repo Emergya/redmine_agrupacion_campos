@@ -1,5 +1,14 @@
 .edit_field > label {
-	text-align: center;
-	width: 250px;
-	padding-top: 5px;
+	text-align: right;
+	width: 160px;
+	padding-top: 3px;
+	padding-right: 2px !important;
+}
+
+.edit_field > .string_cf,.edit_field > .int_cf,.edit_field > .float_cf{
+	width: 660px;
+}
+
+.edit_field > select {
+	width: 660px !important;
 }

@@ -29,7 +29,7 @@
 					<fieldset class= "f_field fieldset_for_field_<%= i %>">
 						<div class="d_field">
 						<p class="p_field"><%= j.label l(:'field.custom_field')+": " %></p>
-						<%= j.select :custom_field_id, options_for_select(@custom_fields_by_tracker, :selected => @field[i][:custom_field_id]) %>
+						<%= j.select :custom_field_id, options_for_select(@custom_fields_by_tracker, :selected => @field[i][:custom_field_id])  %>
 						</div>
 
 						<div class="d_field d_field_priority">
@@ -55,4 +55,4 @@
 	<%= f.submit l(:save), class: "btn_save_group",style: "float: left" %>
 	</div>
 <% end %>
-<%= button_to l(:back), project_ac_groups_path(:project_id => @project) %>
+<%= button_to l(:back), project_ac_groups_path(:project_id => @project), :method => :get %>

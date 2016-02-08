@@ -37,7 +37,7 @@ class AcGroupsController < ApplicationController
   end
 
   def edit
-    @field = @group.ac_fields
+    @field = @group.ac_fields.order("priority ASC")
   	@count_fields = @group.ac_fields.count
   end
 
@@ -47,7 +47,7 @@ class AcGroupsController < ApplicationController
       redirect_to project_ac_groups_path(:project_id => @project)
     else
       flash[:error] = @group.get_error_message
-      redirect_to action: 'edit', :project_id => @project
+      redirect_to action: 'edit', :project_id => @project, :tracker_id => params[:ac_group][:tracker_id]
     end
   end
 
