@@ -4,7 +4,8 @@
 <% end %>
 
 <% groups = @issue.tracker.ac_groups 
- values = @issue.editable_custom_field_values 
+ editable_values = @issue.editable_custom_field_values 
+ values = @issue.custom_field_values
  map_values = values.index_by(&:custom_field_id) 
  cf_used = [] %>
 
@@ -19,7 +20,13 @@
 						<% if map_values.keys.include?(cf.custom_field_id) %>
 							<% cf_used << cf.custom_field_id %>
 		                    <% value = map_values[cf.custom_field_id] %>
-								<p class="edit_field"><%= custom_field_tag_with_label :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %></p>
+							<p class="edit_field">
+			                    <% if editable_values.include? value %>
+										<%= custom_field_tag_with_label :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %>
+			                    <% else %>
+			                    		<%= custom_field_tag_with_label_disabled :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %>
+			                    <% end %>
+							</p>
 						<% end %>
 					<% end %>
 				</fieldset><br>
@@ -31,7 +38,13 @@
 
         <% values.compact.each do |value| %>
             <% if !cf_used.include?(value.custom_field_id) %>
-					<p class="edit_field"><%= custom_field_tag_with_label :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %></p>
+				<p class="edit_field">
+					<% if editable_values.include? value %>
+							<%= custom_field_tag_with_label :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %>
+                    <% else %>
+                    		<%= custom_field_tag_with_label_disabled :issue, value, :required => @issue.required_attribute?(value.custom_field_id) %>
+                    <% end %>
+				</p>
             <% end %>
         <% end %>
 

@@ -1,5 +1,6 @@
 require 'ac/tracker_patch'
 require 'ac/issues_helper_patch'
+require 'ac/custom_fields_helper_patch'
 
 Redmine::Plugin.register :redmine_agrupacion_campos do
   name 'Redmine Agrupacion Campos plugin'
