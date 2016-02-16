@@ -1,4 +1,5 @@
 require 'ac/tracker_patch'
+require 'ac/issue_patch'
 require 'ac/issues_helper_patch'
 require 'ac/custom_fields_helper_patch'
 

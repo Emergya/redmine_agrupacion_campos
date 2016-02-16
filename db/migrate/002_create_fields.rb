@@ -1,5 +1,5 @@
 class CreateFields < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :ac_fields do |t|
         t.column :custom_field_id, :integer
         t.column :ac_group_id, :integer

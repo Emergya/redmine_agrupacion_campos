@@ -1,5 +1,5 @@
 class CreateGroups < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :ac_groups do |t|
         t.column :name, :string
         t.column :priority, :integer
