@@ -7,7 +7,7 @@ Redmine::Plugin.register :redmine_agrupacion_campos do
   name 'Redmine Agrupacion Campos plugin'
   author 'jresinas, mabalos'
   description 'Plugin de Redmine que permite realizar agrupaciones de campos personalizados en fieldsets.'
-  version '0.0.1'
+  version '0.2.0'
   author_url 'http://www.emergya.es'
 
   requires_redmine_plugin :adapter_deface, :version_or_higher => '0.0.1'

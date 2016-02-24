@@ -6,6 +6,8 @@ $(document).ready(function(){
 			i++;
 		}
 
+		console.log(" CREA ----> "+i);
+
 		$div_fieldset_open  = "<fieldset class='f_field fieldset_for_field_"+i+"'>"
 		$label_field        = "<div class='d_field'><p class='p_field'><label for='ac_group_ac_fields_attributes_"+i+"_Campo personalizado: '>Campo personalizado: </label></p>"
 		$select_field_open  = "<select id='ac_group_ac_fields_attributes_"+i+"_custom_field_id' name='ac_group[ac_fields_attributes]["+i+"][custom_field_id]'>"
@@ -29,7 +31,8 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '.delete_field', function(){
-		i = $(".delete_field").data("count");
-		$(".fieldset_for_field_"+i).remove();
+		j = $(this).data("count");
+		console.log(" ELIMINA ----> "+j);
+		$(".fieldset_for_field_"+j).remove();
 	});
 });

@@ -51,3 +51,8 @@
 .add_field, .delete_field{
 	cursor: pointer;
 }
+
+.add-group{
+	margin-top: -10px;
+	margin-bottom: 5px;
+}

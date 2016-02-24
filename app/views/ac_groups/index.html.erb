@@ -3,16 +3,13 @@
    <%= stylesheet_link_tag "/ac_groups.css", :plugin => 'redmine_agrupacion_campos', :media => "screen" %>
 <% end %>
 
-
-<h2> <%= l(:'group.groups_title') %></h2>
-
 <% @trackers.each do |tracker| %>
-
-	<div class="contextual">
+<fieldset>
+	<div class="contextual add-group">
 	  <%= link_to '<span class="icon icon-add">'.html_safe+l(:'group.add'), new_project_ac_group_path(:project_id => @project, :tracker_id => tracker.id) %>
 	</div>
 
-	<h3><%= tracker.name %></h3>
+	<legend><h2><%= tracker.name %></h2></legend>
 	<table class="list">
 	<thead>
 	<tr>
@@ -43,6 +40,6 @@
 	    
 	</tbody>
 	</table>
-
+</fieldset>
 	<br>
 <% end %>
