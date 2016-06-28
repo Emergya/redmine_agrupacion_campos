@@ -11,7 +11,7 @@
 
 	<% if groups.count > 0 && @project.module_enabled?(:agrupacion_de_campos)%>
 
-		<!-- Muestra los campos personalizados que estan asignados a ningún grupo -->
+		<!-- Muestra los campos personalizados que estan asignados a un grupo -->
 		<% groups.order("priority ASC").each do |group| %>
 			<% if group.ac_fields.present? %>
 				<fieldset>

@@ -28,7 +28,7 @@ module AC
       	if @groups.count > 0 && @project.module_enabled?(:agrupacion_de_campos)
 
       		values = issue.visible_custom_field_values
-    			return if values.empty?
+    			return if values.blank?
 
           map_values = values.index_by(&:custom_field_id)
           cf_used = []
@@ -48,7 +48,7 @@ module AC
                   cf_used << cf.custom_field_id
                   value = map_values[cf.custom_field_id]
                     s << "<br><b><div style='width: 200px; float: left'>#{ h(value.custom_field.name) }:</div></b>"
-                    if show_value(value).empty?
+                    if show_value(value).blank?
                       s << "<div>-</div>\n"
                     else
                       s << "<div>#{ simple_format_without_paragraph(h(show_value(value)))}</div>\n"
@@ -66,7 +66,7 @@ module AC
           values.compact.each do |value|
             if !cf_used.include?(value.custom_field_id)
               s << "<br><b><div style='width: 200px; float: left'>#{ h(value.custom_field.name) }:</div></b>"
-              if show_value(value).empty?
+              if show_value(value).blank?
                 s << "<div>-</div>\n"
               else
                 s << "<div>#{ simple_format_without_paragraph(h(show_value(value)))}</div>\n"
