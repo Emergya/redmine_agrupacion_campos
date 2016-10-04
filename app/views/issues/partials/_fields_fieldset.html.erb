@@ -15,7 +15,7 @@
 		<% groups.order("priority ASC").each do |group| %>
 			<% if group.ac_fields.present? %>
 				<fieldset>
-					<legend><%= group.name %></legend>
+					<legend id='<%= group.name %>'><%= group.name %></legend>
 					<% group.ac_fields.order("priority ASC").each do |cf| %>
 						<% if map_values.keys.include?(cf.custom_field_id) %>
 							<% cf_used << cf.custom_field_id %>
