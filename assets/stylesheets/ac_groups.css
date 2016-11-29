@@ -29,7 +29,7 @@
 	float: left;
 }
 
-.d_field_priority{
+.d_field_priority, .d_field_width{
 	margin-left: 15px;
 	margin-right: 15px;
 }

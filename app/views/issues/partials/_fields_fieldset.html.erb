@@ -14,7 +14,7 @@
 		<!-- Muestra los campos personalizados que estan asignados a un grupo -->
 		<% groups.order("priority ASC").each do |group| %>
 			<% if group.ac_fields.present? %>
-				<fieldset>
+				<fieldset class='fieldset_ac_group' style='width: <%= group.width - 5 %>%;'>
 					<legend id='<%= group.name %>'><%= group.name %></legend>
 					<% group.ac_fields.order("priority ASC").each do |cf| %>
 						<% if map_values.keys.include?(cf.custom_field_id) %>

@@ -17,6 +17,12 @@
 			<div><%= f.label l(:'group.priority')+": " %></div>
 			<%= f.number_field(:priority, :step => 1, class: "group_number_field") %>
 		</div>
+
+		<div class="d_field d_field_width">
+			<div><%= f.label l(:'group.width')+": " %></div>
+			<%= f.select :width, options_for_select([100, 50], :selected => @group.width ) %> %
+		</div>
+
 	</div>
 	<%= f.hidden_field :tracker_id, :value => @tracker.id %>
 

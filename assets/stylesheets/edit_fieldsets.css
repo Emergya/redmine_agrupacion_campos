@@ -6,9 +6,19 @@
 }
 
 .edit_field > .string_cf,.edit_field > .int_cf,.edit_field > .float_cf{
-	width: 660px;
+	width: 100%;
+}
+
+.edit_field > .string_cf_exp{
+	max-width: 85% !important;
 }
 
 .edit_field > select {
-	width: 660px !important;
+	width: 100% !important;
+}
+
+.fieldset_ac_group{
+	float: left; 
+	margin-top: 1%;
+	margin-left: 10px;
 }

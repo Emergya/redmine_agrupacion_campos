@@ -34,13 +34,13 @@ module AC
           cf_used = []
 	   	
     		  s = "<tr>\n"
-    		  s << "<td colspan='4'><br>"
+    		  s << "<td colspan='4' style='margin: 0 auto;'><br>"
     		  
     		  @groups.order("priority ASC").each do |group|
     		  	
     		  	# Muestra los campos personalizados que estan asignados a ningún grupo.
     		  	if group.ac_fields.present?
-    			 		s << "<fieldset>"
+    			 		s << "<fieldset class='fieldset_ac_group' style='width:  #{group.width - 5}%;'>"
     			 		s << "<legend>"+group.name+"</legend>"
 
               group.ac_fields.order("priority ASC").each do |cf|
@@ -74,7 +74,7 @@ module AC
             end
           end
 
-
+          s << "</td>"
     			s << "</tr>\n"
     			s.html_safe
       	else
