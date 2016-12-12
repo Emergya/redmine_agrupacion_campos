@@ -34,7 +34,7 @@ module AC
           cf_used = []
 	   	
     		  s = "<tr>\n"
-    		  s << "<td colspan='4' style='margin: 0 auto;'><br>"
+    		  s << "<td colspan='4'>"
     		  
     		  @groups.order("priority ASC").each do |group|
     		  	
@@ -47,16 +47,12 @@ module AC
                 if map_values.keys.include?(cf.custom_field_id)
                   cf_used << cf.custom_field_id
                   value = map_values[cf.custom_field_id]
-                    s << "<br><b><div style='width: 200px; float: left'>#{ h(value.custom_field.name) }:</div></b>"
-                    if show_value(value).blank?
-                      s << "<div>-</div>\n"
-                    else
-                      s << "<div>#{ simple_format_without_paragraph(h(show_value(value)))}</div>\n"
-                    end
+                    s << "<br><div style='width: 200px; float: left'><b>#{ h(value.custom_field.name) }:</b></div>"
+                    s << (show_value(value).blank? ? "<div>-</div>\n" : "<div>#{ simple_format_without_paragraph(h(show_value(value))) }</div>\n")
                 end
               end
 
-    		  		s << "<br></fieldset><br>"
+    		  		s << "<br></fieldset>"
     			  end
           end
 
@@ -65,12 +61,8 @@ module AC
 
           values.compact.each do |value|
             if !cf_used.include?(value.custom_field_id)
-              s << "<br><b><div style='width: 200px; float: left'>#{ h(value.custom_field.name) }:</div></b>"
-              if show_value(value).blank?
-                s << "<div>-</div>\n"
-              else
-                s << "<div>#{ simple_format_without_paragraph(h(show_value(value)))}</div>\n"
-              end
+              s << "<br><div style='width: 200px; float: left'><b>#{ h(value.custom_field.name) }:</b></div>"
+              s << (show_value(value).blank? ? "<div>-</div>\n" : "<div>#{ simple_format_without_paragraph(h(show_value(value))) }</div>\n")
             end
           end
 
