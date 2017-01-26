@@ -1,4 +1,7 @@
 es:
+    permission_ac_edit_groups: Administrar agrupaciónes de campos
+    permission_ac_edit_fields: Editar campos de las agrupaciones
+
     edit: Editar
     delete: Eliminar
     save: Guardar
@@ -16,9 +19,14 @@ es:
         name: Nombre
         width: Anchura
 
+        created_successfully: Agrupación de campos creada con éxito.
+        modified_successfully: Agrupación de campos modificada con éxito.
+        deleted_successfully: Agrupación de campos eliminada con éxito.
+        deleted_error: Se ha producido un error al intentar eliminar la agrupación.
+
         error:
-            name_is_empty: "Debe introducir un nombre para la agrupación."
-            priority_is_empty: "Debe introducir una prioridad para la agrupación."
+            name_is_empty: Debe introducir un nombre para la agrupación.
+            priority_is_empty: Debe introducir una prioridad para la agrupación.
 
     field:
         custom_fields: Campos personalizados
@@ -26,5 +34,8 @@ es:
         priority: Prioridad
         add: Añadir campo personalizado
 
+        deleted_successfully: Campo personalizado eliminado de la agrupación con éxito.
+        deleted_error: Se ha producido un error al intentar eliminar el campo personalizado de la agrupación.
+
         error:
-            priority_is_empty: "Debe introducir una prioridad para los campos personalizados."
+            priority_is_empty: Debe introducir una prioridad para los campos personalizados.

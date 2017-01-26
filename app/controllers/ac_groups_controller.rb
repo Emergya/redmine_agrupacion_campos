@@ -28,7 +28,7 @@ class AcGroupsController < ApplicationController
     @group = AcGroup.new params[:ac_group]
 
     if @group.save
-      flash[:notice] = "La agrupacion de campos se ha guardado con exito."
+      flash[:notice] = l(:'group.created_successfully')
       redirect_to project_ac_groups_path(:project_id => @project)
     else
       flash[:error] = @group.get_error_message
@@ -43,7 +43,7 @@ class AcGroupsController < ApplicationController
 
   def update
     if @group.update_attributes(params[:ac_group]) 
-      flash[:notice] = "La agrupacion se ha modificado con exito."
+      flash[:notice] = l(:'group.modified_successfully')
       redirect_to project_ac_groups_path(:project_id => @project)
     else
       flash[:error] = @group.get_error_message
@@ -53,9 +53,9 @@ class AcGroupsController < ApplicationController
 
   def destroy
   	if @group.destroy
-      flash[:notice] = "La agrupacion se ha eliminado correctamente."
+      flash[:notice] = l(:'group.deleted_successfully')
     else
-      flash[:error] = "Error al intentar eliminar la agrupacion."
+      flash[:error] = l(:'group.deleted_error')
     end
 
     redirect_to project_ac_groups_path(:project_id => @project)
